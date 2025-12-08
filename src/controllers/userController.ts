@@ -40,10 +40,10 @@ export class UserController {
             })
 
             await Promise.allSettled([user.save(), token.save()])
+            res.status(201).json({ message: `Cuenta creada, revisa tu email para confirmarla`, status: 1})
 
-            res.send('Cuenta creada, revisa tu email para confirmarla')
         } catch (error) {
-            res.status(500).json({ error: 'Hubo un error' })
+            res.status(500).json({ error: 'Hubo un error', status: 1 })
         }
     }
 
@@ -115,6 +115,7 @@ export class UserController {
 
 
         } catch (error) {
+            console.log(error);
             res.status(500).json({ error: 'Hubo un error' })
         }
     }

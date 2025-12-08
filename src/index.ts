@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 import { connectDB } from "./config/db";
 
 // Routes para consumirse
-import userRoutes from './routes/userRoutes'
+import auth from './routes/userRoutes'
+import product from './routes/productRoutes'
 
 // Configuración de dotenv
 dotenv.config();
@@ -17,7 +18,8 @@ const PORT = process.env.PORT_BACK;
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
-app.use('/api/auth', userRoutes)
+app.use('/api/auth', auth)
+app.use('/api/product', product)
 
 app.listen(PORT, () => {
     console.log(`El servidor esta corriendo en http://localhost:${PORT}`)

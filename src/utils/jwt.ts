@@ -7,7 +7,7 @@ type UserPayLoad = {
 
 export const generateJWT = (payload: UserPayLoad) => {
 
-    const token = jwt.sign(payload, process.env.JWT_SRECRET, {
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: '180d'
     })
     return token

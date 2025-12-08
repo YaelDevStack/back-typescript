@@ -1,0 +1,1 @@
+import { transport } from "../config/nodemailer"
