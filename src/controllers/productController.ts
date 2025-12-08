@@ -69,7 +69,6 @@ export class ProductController {
             });
 
         } catch (error) {
-            console.error(error);
             return res.status(500).json({
                 error: 'Hubo un error en el servidor',
                 status: 3
@@ -77,5 +76,80 @@ export class ProductController {
         }
     };
 
+    // Eliminar un producto
+    static deleteProduct = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params;
+            // Verifica si existe ese producto
+            const product = Product.findByIdAndDelete(id);
+            if (!product) {
+                return res.status(404).json({
+                    error: "El producto no existe",
+                    status: 2
+                });
+            }
+
+            res.status(200).json({
+                message: 'El producto se ha eliminado correctamente',
+                status: 1
+            })
+
+        }
+        catch (error) {
+            return res.status(500).json({
+                error: 'Hubo un error en el servidor',
+                status: 3
+            });
+        }
+    }
+
+    // Traer todos los Productos
+    static getAllProducts = async (req: Request, res: Response) => {
+        try {
+            const products = await Product.find();
+
+            res.status(200).json({
+                products,
+                message: 'Se han cargado todos los productos con exito',
+                status: 1
+            })
+
+        } catch (error) {
+            return res.status(500).json({
+                error: 'Hubo un error en el servidor',
+                status: 3
+            });
+        }
+    }
+
+    // Traer productos por ID
+    static getProductById = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params
+            if (!id) {
+                return res.status(404).json({
+                    error: "El producto no existe",
+                    status: 2
+                })
+            }
+            const product = await Product.findById(id)
+
+            res.status(200).json({
+                product,
+                message: 'Se ha encontrado el producto',
+                status: 1
+
+            })
+
+        } catch (error) {
+            return res.status(500).json({
+                error: 'Hubo un error en el servidor',
+                status: 3
+            });
+        }
+
+
+
+    }
 
 }

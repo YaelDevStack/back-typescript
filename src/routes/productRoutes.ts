@@ -55,4 +55,36 @@ router.put(
     ProductController.updateProduct
 );
 
+
+// Eliminar un producto
+router.delete('/delete-product/:id',
+    // Validaciones
+    authenticate,
+    param("id").isMongoId().withMessage("El ID del producto no es válido"),
+    handleInputsErrors,
+    // Controlador
+    ProductController.deleteProduct
+
+)
+
+// Traer todos los productos
+router.get('/getall-product',
+    // Validaciones
+    authenticate,
+    handleInputsErrors,
+    // Controlador
+    ProductController.getAllProducts
+
+)
+
+// Traer producto por id
+router.get('/get-product/:id',
+    // Validaciones
+    authenticate,
+    param("id").isMongoId().withMessage("El ID del producto no es válido"),
+    handleInputsErrors,
+    // Controlador
+    ProductController.getProductById
+
+)
 export default router
