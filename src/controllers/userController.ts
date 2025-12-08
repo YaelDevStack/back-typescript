@@ -115,7 +115,6 @@ export class UserController {
 
 
         } catch (error) {
-            console.log(error);
             res.status(500).json({ error: 'Hubo un error' })
         }
     }
